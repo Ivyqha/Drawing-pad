@@ -1,17 +1,26 @@
-const squareBox = document.getElementById("container") ; 
-const boxSize = squareBox.getBoundingClientRect().width; 
-const squareBysquare = 20; // to set up a prompt by user 
-const numSquares = Math.pow(squareBysquare,2); // squares the number to get numSquares
-const cellSize = boxSize /(squareBysquare) - 2 ;
+
+function createGrid (r,c) {
+    const squareBox = document.getElementById("container"); 
   
+    //creating column lines and appending to the container 
+        for(let i=0; i<r; i++) {
+            let columnLine = document.createElement ("div"); 
+            columnLine.classList.add("column-lines"); 
+            squareBox.appendChild(columnLine);       
+        }; 
 
-for (let i=0; i<numSquares; i++) { 
-    const cell = document.createElement ("div"); 
-    cell.classList.add("cell"); 
-    cell.style.width = `${cellSize}px`; 
-    cell.style.height = `${cellSize}px` ; 
-    squareBox.appendChild(cell);
-}; 
+    //creating row lines and appending it to the columns 
+    const smallBox = document.querySelectorAll ('#container div');
+    smallBox.forEach(function (e) {
+        for (let i=0; i<c; i++) {
+        const rowLine = document.createElement ("div"); 
+        rowLine.classList.add("row-lines");  
+        e.appendChild(rowLine); 
+        };
+        
+    }); 
+    
+    
+};
 
-
-console.log(boxSize)
+createGrid(30,30) // (columns, rows)

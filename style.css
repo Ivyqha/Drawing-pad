@@ -1,19 +1,23 @@
 #container { 
-    width: 600px; 
-    height: 600px; 
-    display: flex; 
-    flex-wrap: wrap; 
-    border: 1px solid black ;
- 
+    position: absolute;
+    width: 800px; 
+    height: 800px;
+    display: flex;  
+    border: 1px solid black; 
 }
 
-.cell { 
-    width: auto;
-    display: flex;
-    flex-wrap: wrap;
+.column-lines{
+    border-right: 1px solid black;
+    box-sizing: border-box;
     flex-grow: 1;
-   
-    border: 1px solid black; 
-    margin: 0; 
+    display: grid; 
 }
+
+.row-lines {  
+    flex-grow: 1;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+
 
