@@ -23,8 +23,12 @@ function createGrid (n) {
 };
 
 //prompt user input for amounts of boxes per side 
+//grid must be between 0-100 
 function userInput () {
-    let input = prompt ("how many boxes per side?"); 
+    let input = -1 ;
+    while (input < 0 || input>100 ) {
+        input = prompt ("How many boxes per side?");
+    } 
     createGrid(input); 
 }
 
@@ -36,7 +40,9 @@ const cells = document.querySelectorAll(".row-lines");
 
 cells.forEach(cell => { 
     cell.addEventListener("mouseover", function(){
-        this.style.backgroundColor = "yellow"; 
+        this.style.backgroundColor = "black"; 
     }); 
 }); 
+
+// create a maximum of 100 grid squares 
 
