@@ -19,5 +19,9 @@
     box-sizing: border-box;
 }
 
+.cell { 
+    border-right: 1px solid black;
+    
+}
 
 

@@ -22,6 +22,7 @@ function createGrid (n) {
     
 };
 
+//prompt user input for amounts of boxes per side 
 function userInput () {
     let input = prompt ("how many boxes per side?"); 
     createGrid(input); 
@@ -29,4 +30,13 @@ function userInput () {
 
 userInput (); 
 
+// set hover motion over drawing pad 
+
+const cells = document.querySelectorAll(".column-lines", ".row-lines");
+
+cells.forEach(cell => { 
+    cell.addEventListener("mouseover", function(){
+        this.style.backgroundColor = "yellow"; 
+    }); 
+}); 
 
