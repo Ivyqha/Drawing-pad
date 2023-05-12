@@ -44,5 +44,47 @@ cells.forEach(cell => {
     }); 
 }); 
 
-// create a maximum of 100 grid squares 
+//creating a clear-grid button
+//this clears the drawing the pad
+var clearBtn = document.createElement ("button"); 
+clearBtn.classList.add("clearButton");
+var clearText = document.createTextNode("Clear Grid"); 
+clearBtn.appendChild(clearText); 
+var clearGr = document.getElementById("clear-grid"); 
+clearGr.appendChild(clearBtn); 
+
+
+function clearGrid () { 
+    const allCells = document.querySelectorAll (".row-lines"); 
+    allCells.forEach(cell => { 
+        cell.style.backgroundColor = "" ; 
+    }); 
+    
+}; 
+clearBtn.addEventListener("click", clearGrid); 
+
+
+//creating a new grid button 
+//clears grid and option to change grid size 
+
+var newBtn = document.createElement ("button"); 
+newBtn.classList.add ("newButton"); 
+var newText = document.createTextNode("New Grid"); 
+newBtn.appendChild(newText); 
+var newGrid = document.getElementById("new-grid"); 
+newGrid.appendChild(newBtn); 
+
+function reloadGame () { 
+    location.reload (); 
+}
+function changeGrid () { 
+    clearGrid(); 
+    reloadGame ();
+}; 
+
+newBtn.addEventListener("click", changeGrid); 
+
+// create a standard grid size 16x16 on landing page 
+
+
 

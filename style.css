@@ -1,5 +1,4 @@
 #container { 
-    position: absolute;
     width: 800px; 
     height: 800px;
     display: flex;  
@@ -22,6 +21,11 @@
 .cell { 
     border-right: 1px solid black;
     
+}
+
+.buttons  {
+    display: flex 
+
 }
 
 
