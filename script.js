@@ -41,6 +41,16 @@ function clearGrid () {
 }; 
 clearBtn.addEventListener("click", clearGrid); 
 
+//creating a random colour generator 
+function getRandomColor() { 
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+  return color;
+}; 
+
 //creating a new grid button 
 //clears grid and option to change grid size 
 
@@ -73,7 +83,8 @@ function changeGrid () {
     const cells = document.querySelectorAll(".row-lines");
     cells.forEach(cell => { 
         cell.addEventListener("mouseover", function(){
-            this.style.backgroundColor = "black"; 
+            const randomColor = getRandomColor(); 
+            this.style.backgroundColor = randomColor; 
         }); 
     }); 
 }; 
@@ -89,7 +100,8 @@ const cells = document.querySelectorAll(".row-lines");
 
 cells.forEach(cell => { 
     cell.addEventListener("mouseover", function(){
-        this.style.backgroundColor = "black"; 
+        const randomColor = getRandomColor (); 
+        this.style.backgroundColor = randomColor; 
     }); 
 }); 
 
