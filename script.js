@@ -22,28 +22,6 @@ function createGrid (n) {
     
 };
 
-//prompt user input for amounts of boxes per side 
-//grid must be between 0-100 
-function userInput () {
-    let input = -1 ;
-    while (input < 0 || input>100 ) {
-        input = prompt ("How many boxes per side?");
-    } 
-    createGrid(input); 
-}
-
-userInput (); 
-
-// set hover motion over drawing pad 
-
-const cells = document.querySelectorAll(".row-lines");
-
-cells.forEach(cell => { 
-    cell.addEventListener("mouseover", function(){
-        this.style.backgroundColor = "black"; 
-    }); 
-}); 
-
 //creating a clear-grid button
 //this clears the drawing the pad
 var clearBtn = document.createElement ("button"); 
@@ -63,7 +41,6 @@ function clearGrid () {
 }; 
 clearBtn.addEventListener("click", clearGrid); 
 
-
 //creating a new grid button 
 //clears grid and option to change grid size 
 
@@ -74,17 +51,51 @@ newBtn.appendChild(newText);
 var newGrid = document.getElementById("new-grid"); 
 newGrid.appendChild(newBtn); 
 
-function reloadGame () { 
-    location.reload (); 
+    //prompt user input for amounts of boxes per side 
+    //grid must be between 0-100 
+    function userInput () {
+        let input = -1 ;
+        while (input < 1 || input>100 ) {
+        input = prompt ("How many boxes per side?");
+        } 
+    createGrid(input); 
 }
+
 function changeGrid () { 
-    clearGrid(); 
-    reloadGame ();
+    
+    const squareBox = document.getElementById("container");
+    while (squareBox.firstChild) { 
+        squareBox.removeChild(squareBox.firstChild); 
+    };
+
+    userInput(); 
+
+    const cells = document.querySelectorAll(".row-lines");
+    cells.forEach(cell => { 
+        cell.addEventListener("mouseover", function(){
+            this.style.backgroundColor = "black"; 
+        }); 
+    }); 
 }; 
 
 newBtn.addEventListener("click", changeGrid); 
 
-// create a standard grid size 16x16 on landing page 
+//standard 16x16 grid upon landing page 
+createGrid(16); 
+
+// set hover motion over drawing pad 
+
+const cells = document.querySelectorAll(".row-lines");
+
+cells.forEach(cell => { 
+    cell.addEventListener("mouseover", function(){
+        this.style.backgroundColor = "black"; 
+    }); 
+}); 
 
 
 
+
+
+
+ 
