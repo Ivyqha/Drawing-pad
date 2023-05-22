@@ -97,15 +97,12 @@ createGrid(16);
 // set hover motion over drawing pad 
 
 const cells = document.querySelectorAll(".row-lines");
-
 cells.forEach(cell => { 
     cell.addEventListener("mouseover", function(){
-        const randomColor = getRandomColor (); 
+        const randomColor = getRandomColor(); 
         this.style.backgroundColor = randomColor; 
     }); 
 }); 
-
-
 
 
 
