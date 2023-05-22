@@ -2,7 +2,8 @@
     width: 800px; 
     height: 800px;
     display: flex;  
-    border: 1px solid black; 
+    border: 1px solid black;
+    margin: auto;
 }
 
 .column-lines{
@@ -23,9 +24,51 @@
     
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    background-color: aliceblue ;
+  } 
+
 .buttons  {
     display: flex 
 
 }
+
+h1 { 
+    font-size: 100px; 
+    text-align: center; 
+    color: rgb(228, 228, 228); 
+    font-family: 'Lilita One', cursive;
+    -webkit-text-stroke-color: rgb(0, 0, 0);
+    -webkit-text-stroke-width: 2px;
+    text-transform: uppercase;
+    background-color: rgb(59, 59, 134) ;
+    margin-bottom: 20px; 
+    padding: 25px;
+    
+}
+
+.buttons { 
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    
+}
+
+.clearButton, 
+.newButton {
+    padding: 10px;
+    margin: 20px; 
+    font-size: 20px;
+    font-weight: bold; 
+    border: 2px black;
+    border-style: solid;
+    background-color:rgb(202, 223, 249); 
+    border-radius: 6px; 
+    
+}
+
+
 
 
