@@ -66,7 +66,7 @@ newGrid.appendChild(newBtn);
     function userInput () {
         let input = -1 ;
         while (input < 1 || input>100 ) {
-        input = prompt ("How many boxes per side?");
+        input = prompt ("How many boxes per side? (max 100) ");
         } 
     createGrid(input); 
 }
