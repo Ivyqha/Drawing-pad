@@ -31,25 +31,28 @@ clearBtn.appendChild(clearText);
 var clearGr = document.getElementById("clear-grid"); 
 clearGr.appendChild(clearBtn); 
 
-clearBtn.addEventListener("mouseover", function () {
-    clearBtn.style.borderColor = "rgb(190, 190, 235)"; 
-    clearBtn.style.color="rgb(94, 94, 160)"; 
-});
-
-clearBtn.addEventListener("mouseout", function () {
-    clearBtn.style.borderColor ="black"; 
-    clearBtn.style.color="black"; 
-});
-
-
 function clearGrid () { 
     const allCells = document.querySelectorAll (".row-lines"); 
     allCells.forEach(cell => { 
         cell.style.backgroundColor = "" ; 
     }); 
+    onclick = function (e) { 
+    paintBtn.style.borderColor = "black"; 
+    paintBtn.style.color="black";
+    eraserBtn.style.borderColor = "black"; 
+    eraserBtn.style.color="black";
+    };
     
 }; 
-clearBtn.addEventListener("click", clearGrid); 
+clearBtn.addEventListener("click", clearGrid);
+clearBtn.addEventListener("mouseover", function () {
+    clearBtn.style.borderColor = "rgb(190, 190, 235)"; 
+    clearBtn.style.color="rgb(94, 94, 160)"; 
+});
+clearBtn.addEventListener("mouseout", function () {
+    clearBtn.style.borderColor ="black"; 
+    clearBtn.style.color="black"; 
+});
 
 //creating a random colour generator 
 function getRandomColor() { 
@@ -108,6 +111,12 @@ function changeGrid () {
             this.style.backgroundColor = randomColor; 
         }); 
     }); 
+    onclick = function (e) { 
+        paintBtn.style.borderColor = "black"; 
+        paintBtn.style.color="black";
+        eraserBtn.style.borderColor = "black"; 
+        eraserBtn.style.color="black";
+        }; 
 }; 
 
 newBtn.addEventListener("click", changeGrid); 
@@ -133,7 +142,6 @@ eraserBtn.appendChild(eraserText);
 var eraser = document.getElementById("eraser-button"); 
 eraser.appendChild(eraserBtn); 
 
-
 eraserBtn.addEventListener("click", function (e) { 
     eraserBtn.style.borderColor = "rgb(190, 190, 235)"; 
     eraserBtn.style.color="rgb(94, 94, 160)"; 
@@ -143,31 +151,13 @@ eraserBtn.addEventListener("click", function (e) {
             cells.forEach(cell => { 
             cell.addEventListener("mouseover", function(){
                 this.style.backgroundColor = "aliceblue"; 
+
             }); 
         }); 
-        };  
+        paintBtn.style.borderColor = "black"; 
+        paintBtn.style.color="black";
+    };  
 });
-
-eraserBtn.addEventListener("mouseover", function () {
-    eraserBtn.style.borderColor = "rgb(190, 190, 235)"; 
-    eraserBtn.style.color="rgb(94, 94, 160)"; 
-});
-eraserBtn.addEventListener("mouseout", function () {
-    eraserBtn.style.borderColor ="black"; 
-    eraserBtn.style.color="black"; 
-});
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //creating pen button 
@@ -179,8 +169,8 @@ var paint = document.getElementById("paint-button");
 paint.appendChild(paintBtn); 
 
 paintBtn.addEventListener("click", function (e) { 
-    eraserBtn.style.borderColor = "rgb(190, 190, 235)"; 
-    eraserBtn.style.color="rgb(94, 94, 160)"; 
+    paintBtn.style.borderColor = "rgb(190, 190, 235)"; 
+    paintBtn.style.color="rgb(94, 94, 160)"; 
     
     onclick = function (e) {
         const cells = document.querySelectorAll(".row-lines");
@@ -191,13 +181,10 @@ paintBtn.addEventListener("click", function (e) {
             });  
         }); 
     };  
-});
+    eraserBtn.style.borderColor = "black"; 
+    eraserBtn.style.color="black";
 
-    
-
-
-
-
+}); 
 
 
  
