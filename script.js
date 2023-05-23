@@ -31,6 +31,16 @@ clearBtn.appendChild(clearText);
 var clearGr = document.getElementById("clear-grid"); 
 clearGr.appendChild(clearBtn); 
 
+clearBtn.addEventListener("mouseover", function () {
+    clearBtn.style.borderColor = "rgb(190, 190, 235)"; 
+    clearBtn.style.color="rgb(94, 94, 160)"; 
+});
+
+clearBtn.addEventListener("mouseout", function () {
+    clearBtn.style.borderColor ="black"; 
+    clearBtn.style.color="black"; 
+});
+
 
 function clearGrid () { 
     const allCells = document.querySelectorAll (".row-lines"); 
@@ -60,6 +70,17 @@ var newText = document.createTextNode("New Grid");
 newBtn.appendChild(newText); 
 var newGrid = document.getElementById("new-grid"); 
 newGrid.appendChild(newBtn); 
+
+newBtn.addEventListener("mouseover", function () {
+    newBtn.style.borderColor = "rgb(190, 190, 235)"; 
+    newBtn.style.color="rgb(94, 94, 160)"; 
+});
+newBtn.addEventListener("mouseout", function () {
+    newBtn.style.borderColor ="black"; 
+    newBtn.style.color="black"; 
+});
+
+
 
     //prompt user input for amounts of boxes per side 
     //grid must be between 0-100 
@@ -103,6 +124,78 @@ cells.forEach(cell => {
         this.style.backgroundColor = randomColor; 
     }); 
 }); 
+
+//creating eraser button 
+var eraserBtn = document.createElement ("button"); 
+eraserBtn.classList.add("eraserButton");
+var eraserText = document.createTextNode("Eraser"); 
+eraserBtn.appendChild(eraserText); 
+var eraser = document.getElementById("eraser-button"); 
+eraser.appendChild(eraserBtn); 
+
+
+eraserBtn.addEventListener("click", function (e) { 
+    eraserBtn.style.borderColor = "rgb(190, 190, 235)"; 
+    eraserBtn.style.color="rgb(94, 94, 160)"; 
+    
+    onclick = function (e) {
+        const cells = document.querySelectorAll(".row-lines");
+            cells.forEach(cell => { 
+            cell.addEventListener("mouseover", function(){
+                this.style.backgroundColor = "aliceblue"; 
+            }); 
+        }); 
+        };  
+});
+
+eraserBtn.addEventListener("mouseover", function () {
+    eraserBtn.style.borderColor = "rgb(190, 190, 235)"; 
+    eraserBtn.style.color="rgb(94, 94, 160)"; 
+});
+eraserBtn.addEventListener("mouseout", function () {
+    eraserBtn.style.borderColor ="black"; 
+    eraserBtn.style.color="black"; 
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//creating pen button 
+var paintBtn = document.createElement ("button"); 
+paintBtn.classList.add("paintButton");
+var paintText = document.createTextNode("Paint"); 
+paintBtn.appendChild(paintText); 
+var paint = document.getElementById("paint-button"); 
+paint.appendChild(paintBtn); 
+
+paintBtn.addEventListener("click", function (e) { 
+    eraserBtn.style.borderColor = "rgb(190, 190, 235)"; 
+    eraserBtn.style.color="rgb(94, 94, 160)"; 
+    
+    onclick = function (e) {
+        const cells = document.querySelectorAll(".row-lines");
+            cells.forEach(cell => { 
+            cell.addEventListener("mouseover", function(){
+            const randomColor = getRandomColor(); 
+            this.style.backgroundColor = randomColor; 
+            });  
+        }); 
+    };  
+});
+
+    
+
+
 
 
 
