@@ -22,6 +22,22 @@ function createGrid (n) {
     
 };
 
+let defaultStyle = {  
+    border: "2px solid black",
+    color: " black"
+}; 
+
+let hoverStyle = {
+    border: "2px solid rgb(190, 190, 235)",
+    color: "rgb(94, 94, 160)" 
+}; 
+
+let clickedStyle = { 
+    border: "2px solid rgb(190, 190, 235)",
+    color: "rgb(94, 94, 160)" 
+}; 
+
+
 //creating a clear-grid button
 //this clears the drawing the pad
 var clearBtn = document.createElement ("button"); 
@@ -36,22 +52,14 @@ function clearGrid () {
     allCells.forEach(cell => { 
         cell.style.backgroundColor = "" ; 
     }); 
-    onclick = function (e) { 
-    paintBtn.style.borderColor = "black"; 
-    paintBtn.style.color="black";
-    eraserBtn.style.borderColor = "black"; 
-    eraserBtn.style.color="black";
-    };
     
 }; 
 clearBtn.addEventListener("click", clearGrid);
 clearBtn.addEventListener("mouseover", function () {
-    clearBtn.style.borderColor = "rgb(190, 190, 235)"; 
-    clearBtn.style.color="rgb(94, 94, 160)"; 
-});
+    Object.assign(clearBtn.style, hoverStyle);  
+}); 
 clearBtn.addEventListener("mouseout", function () {
-    clearBtn.style.borderColor ="black"; 
-    clearBtn.style.color="black"; 
+    Object.assign(clearBtn.style, defaultStyle);
 });
 
 //creating a random colour generator 
@@ -73,17 +81,6 @@ var newText = document.createTextNode("New Grid");
 newBtn.appendChild(newText); 
 var newGrid = document.getElementById("new-grid"); 
 newGrid.appendChild(newBtn); 
-
-newBtn.addEventListener("mouseover", function () {
-    newBtn.style.borderColor = "rgb(190, 190, 235)"; 
-    newBtn.style.color="rgb(94, 94, 160)"; 
-});
-newBtn.addEventListener("mouseout", function () {
-    newBtn.style.borderColor ="black"; 
-    newBtn.style.color="black"; 
-});
-
-
 
     //prompt user input for amounts of boxes per side 
     //grid must be between 0-100 
@@ -111,15 +108,15 @@ function changeGrid () {
             this.style.backgroundColor = randomColor; 
         }); 
     }); 
-    onclick = function (e) { 
-        paintBtn.style.borderColor = "black"; 
-        paintBtn.style.color="black";
-        eraserBtn.style.borderColor = "black"; 
-        eraserBtn.style.color="black";
-        }; 
 }; 
 
 newBtn.addEventListener("click", changeGrid); 
+newBtn.addEventListener("mouseover", function () {
+    Object.assign(newBtn.style, hoverStyle);  
+}); 
+newBtn.addEventListener("mouseout", function () {
+    Object.assign(newBtn.style, defaultStyle);
+});
 
 //standard 16x16 grid upon landing page 
 createGrid(16); 
@@ -136,30 +133,63 @@ cells.forEach(cell => {
 
 //creating eraser button 
 var eraserBtn = document.createElement ("button"); 
-eraserBtn.classList.add("eraserButton");
+eraserBtn.classList.add("eraseButton");
 var eraserText = document.createTextNode("Eraser"); 
 eraserBtn.appendChild(eraserText); 
 var eraser = document.getElementById("eraser-button"); 
 eraser.appendChild(eraserBtn); 
 
-eraserBtn.addEventListener("click", function (e) { 
-    eraserBtn.style.borderColor = "rgb(190, 190, 235)"; 
-    eraserBtn.style.color="rgb(94, 94, 160)"; 
+let clickCount = 0; 
+eraserBtn.addEventListener("click", function () { 
     
-    onclick = function (e) {
-        const cells = document.querySelectorAll(".row-lines");
-            cells.forEach(cell => { 
-            cell.addEventListener("mouseover", function(){
-                this.style.backgroundColor = "aliceblue"; 
+    clickCount ++ 
 
-            }); 
-        }); 
-        paintBtn.style.borderColor = "black"; 
-        paintBtn.style.color="black";
-    };  
+    if (clickCount === 1) {  
+        erase ();
+        Object.assign(eraserBtn.style, clickedStyle);
+    } else if (clickCount === 2) {
+        pen();
+        Object.assign(eraserBtn.style, defaultStyle);
+    }; 
 });
 
+function erase () { 
+    const cells = document.querySelectorAll(".row-lines");
+            cells.forEach(cell => { 
+            cell.addEventListener("mouseover", function(){ 
+                this.style.backgroundColor = "aliceblue";
+            });  
+        });  
+    eraserBtn.classList.toggle("erase");
+    console.log("first click = erase")
+}; 
 
+function pen () { 
+    const cells = document.querySelectorAll(".row-lines");
+            cells.forEach(cell => { 
+            cell.addEventListener("mouseover", function(){ 
+                const randomColor = getRandomColor(); 
+                this.style.backgroundColor = randomColor; 
+            });  
+        });
+    eraserBtn.classList.toggle("pen");
+    clickCount = 0;
+    console.log("second click = pen")
+}; 
+
+eraserBtn.addEventListener("mouseover", function () {
+    Object.assign(eraserBtn.style,hoverStyle); 
+}); 
+
+eraserBtn.addEventListener ("mouseout", function () {
+    if (!eraserBtn.classList.contains("erase")) {
+        Object.assign(eraserBtn.style,defaultStyle); 
+    };
+}); 
+
+
+
+/*
 //creating pen button 
 var paintBtn = document.createElement ("button"); 
 paintBtn.classList.add("paintButton");
@@ -169,9 +199,6 @@ var paint = document.getElementById("paint-button");
 paint.appendChild(paintBtn); 
 
 paintBtn.addEventListener("click", function (e) { 
-    paintBtn.style.borderColor = "rgb(190, 190, 235)"; 
-    paintBtn.style.color="rgb(94, 94, 160)"; 
-    
     onclick = function (e) {
         const cells = document.querySelectorAll(".row-lines");
             cells.forEach(cell => { 
@@ -181,10 +208,23 @@ paintBtn.addEventListener("click", function (e) {
             });  
         }); 
     };  
-    eraserBtn.style.borderColor = "black"; 
-    eraserBtn.style.color="black";
 
+    paintBtn.classList.toggle("clicked"); 
+    if (paintBtn.classList.contains("clicked")) { 
+        Object.assign(paintBtn.style, clickedStyle);
+        Object.assign(eraserBtn.style, defaultStyle);
+    } else { 
+        Object.assign (paintBtn.style, defaultStyle); 
+    }; 
+});
+
+paintBtn.addEventListener("mouseover", function () {
+    Object.assign(paintBtn.style,hoverStyle); 
+}); 
+paintBtn.addEventListener ("mouseout", function () {
+    if (!paintBtn.classList.contains("clicked")) {
+        Object.assign(paintBtn.style,defaultStyle); 
+    };
 }); 
 
-
- 
+*/

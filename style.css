@@ -53,13 +53,12 @@ h1 {
 .buttons { 
     display: flex;
     justify-content: center;
-    margin-bottom: 30px;
-    
+    margin-bottom: 30px; 
 }
 
 .clearButton, 
 .newButton, 
-.eraserButton,
+.eraseButton, 
 .paintButton {
     width: 150px;
     padding: 10px;
@@ -69,9 +68,9 @@ h1 {
     border: 2px black;
     border-style: solid;
     background-color:rgb(202, 223, 249); 
-    border-radius: 6px; 
-    
-}
+    border-radius: 6px;  
+}; 
+
 
 p { 
     margin-top: 20px;
