@@ -23,19 +23,26 @@ function createGrid (n) {
 };
 
 let defaultStyle = {  
-    border: "2px solid black",
-    color: " black"
-}; 
-
-let hoverStyle = {
-    border: "2px solid rgb(190, 190, 235)",
-    color: "rgb(94, 94, 160)" 
+    border:"2px solid black",
+    color: "black",
 }; 
 
 let clickedStyle = { 
     border: "2px solid rgb(190, 190, 235)",
     color: "rgb(94, 94, 160)" 
 }; 
+
+let hoverStyle = { 
+    border: "2px solid rgb(190, 190, 235)",
+    color: "rgb(94, 94, 160)" 
+}; 
+
+let inactiveStyle = {
+    border:"2px solid black",
+    color: "black",
+}; 
+
+
 
 
 //creating a clear-grid button
@@ -59,7 +66,7 @@ clearBtn.addEventListener("mouseover", function () {
     Object.assign(clearBtn.style, hoverStyle);  
 }); 
 clearBtn.addEventListener("mouseout", function () {
-    Object.assign(clearBtn.style, defaultStyle);
+    Object.assign(clearBtn.style, inactiveStyle);
 });
 
 //creating a random colour generator 
@@ -115,7 +122,7 @@ newBtn.addEventListener("mouseover", function () {
     Object.assign(newBtn.style, hoverStyle);  
 }); 
 newBtn.addEventListener("mouseout", function () {
-    Object.assign(newBtn.style, defaultStyle);
+    Object.assign(newBtn.style, inactiveStyle);
 });
 
 //standard 16x16 grid upon landing page 
@@ -141,16 +148,19 @@ eraser.appendChild(eraserBtn);
 
 let clickCount = 0; 
 eraserBtn.addEventListener("click", function () { 
-    
-    clickCount ++ 
 
-    if (clickCount === 1) {  
+    clickCount ++ 
+    
+    if (clickCount % 2 === 0) { 
+        pen();
+        Object.assign(eraserBtn.style, defaultStyle) 
+        eraserBtn.classList.remove ("erase");
+    } else {
         erase ();
         Object.assign(eraserBtn.style, clickedStyle);
-    } else if (clickCount === 2) {
-        pen();
-        Object.assign(eraserBtn.style, defaultStyle);
+        eraserBtn.classList.remove ("pen");
     }; 
+
 });
 
 function erase () { 
@@ -173,18 +183,19 @@ function pen () {
             });  
         });
     eraserBtn.classList.toggle("pen");
-    clickCount = 0;
     console.log("second click = pen")
 }; 
 
 eraserBtn.addEventListener("mouseover", function () {
-    Object.assign(eraserBtn.style,hoverStyle); 
+    Object.assign(eraserBtn.style, hoverStyle); 
+    console.log ("hover")
 }); 
 
 eraserBtn.addEventListener ("mouseout", function () {
     if (!eraserBtn.classList.contains("erase")) {
-        Object.assign(eraserBtn.style,defaultStyle); 
+        Object.assign(eraserBtn.style, inactiveStyle); 
     };
+    console.log ("unhover")
 }); 
 
 
