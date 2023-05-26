@@ -58,7 +58,8 @@ h1 {
 
 .clearButton, 
 .newButton, 
-.eraseButton {
+.eraseButton, 
+.rainbowButton {
     width: 150px;
     padding: 10px;
     margin: 20px; 

@@ -1,3 +1,12 @@
+let defaultStyle = {  
+    border:"2px solid black",
+    color: "black",
+}; 
+let hoverStyle = { 
+    border: "2px solid rgb(190, 190, 235)",
+    color: "rgb(94, 94, 160)" 
+}; 
+
 
 function createGrid (n) {
     const squareBox = document.getElementById("container"); 
@@ -22,15 +31,143 @@ function createGrid (n) {
     
 };
 
-let defaultStyle = {  
-    border:"2px solid black",
-    color: "black",
+
+// creating standard and rainbow pen
+let isDrawing = false; 
+
+function standardPen() { 
+    const cells = document.querySelectorAll(".row-lines");
+    cells.forEach(cell => { 
+        cell.addEventListener("mousedown", () => {
+            isDrawing = true; 
+        }); 
+
+        cell.addEventListener("mouseup", () => {
+            isDrawing = false; 
+        }); 
+
+        cell.addEventListener("mousemove", (event) => {
+            if (isDrawing) {
+                cell.style.backgroundColor = "black"; 
+            }
+        })
+    }); 
+
 }; 
 
-let hoverStyle = { 
-    border: "2px solid rgb(190, 190, 235)",
-    color: "rgb(94, 94, 160)" 
+function rainbowPen () { 
+    const cells = document.querySelectorAll(".row-lines");
+    cells.forEach(cell => { 
+        cell.addEventListener("mousedown", () => {
+            isDrawing = true; 
+        }); 
+
+        cell.addEventListener("mouseup", () => {
+            isDrawing = false; 
+        }); 
+
+        cell.addEventListener("mousemove", (event) => {
+            if (isDrawing) {
+                const randomColor = getRandomColor(); 
+            cell.style.backgroundColor = randomColor; 
+            };
+        });
+    }); 
 }; 
+
+
+let clickCount = 0; 
+
+function pen () { 
+    standardPen(); 
+}; 
+
+
+//creating a rainbow button
+var rainbowBtn = document.createElement ("button"); 
+rainbowBtn.classList.add("rainbowButton");
+var rainbowText = document.createTextNode("Rainbow"); 
+rainbowBtn.appendChild(rainbowText); 
+var rainbow = document.getElementById("rainbow"); 
+rainbow.appendChild(rainbowBtn); 
+rainbowBtn.addEventListener("click", rainbowPen); 
+
+let rainbowBtnActive = false ; 
+
+rainbowBtn.addEventListener("click", function (){
+
+    clickCount++; 
+    
+    if (clickCount % 2 === 0) { 
+        rainbowBtnActive = false;
+        pen (); 
+        Object.assign(rainbowBtn.style, defaultStyle); 
+    } else {
+        rainbowBtnActive = true;
+        rainbowPen(); 
+        Object.assign (rainbowBtn.style, hoverStyle); 
+    }   
+});
+
+//creating eraser button 
+var eraserBtn = document.createElement ("button"); 
+eraserBtn.classList.add("eraseButton");
+var eraserText = document.createTextNode("Eraser"); 
+eraserBtn.appendChild(eraserText); 
+var eraser = document.getElementById("eraser-button"); 
+eraser.appendChild(eraserBtn); 
+
+let eraserBtnActive = false; 
+
+eraserBtn.addEventListener("click", function (){
+
+    clickCount++; 
+    
+    if (clickCount % 2 === 0) { 
+        eraserBtnActive = false;
+        pen (); 
+        Object.assign(eraserBtn.style, defaultStyle); 
+    } else{
+        eraserBtnActive = true;
+        erase (); 
+        Object.assign (eraserBtn.style, hoverStyle); 
+    }   
+
+    if (rainbowBtnActive === true && eraserBtnActive === true) { 
+        erase (); 
+    } else if (rainbowBtnActive === true && eraserBtnActive === false) { 
+        rainbowPen(); 
+    };
+});
+
+function erase () { 
+    const cells = document.querySelectorAll(".row-lines");
+    cells.forEach(cell => { 
+        cell.addEventListener("mousedown", () => {
+            isDrawing = true; 
+        }); 
+
+        cell.addEventListener("mouseup", () => {
+            isDrawing = false; 
+        }); 
+
+        cell.addEventListener("mousemove", (event) => {
+            if (isDrawing) {
+                cell.style.backgroundColor = "aliceblue"; 
+            }
+        })
+    }); 
+}; 
+
+eraserBtn.addEventListener("mouseover", function () {
+    Object.assign(eraserBtn.style, hoverStyle); 
+}); 
+eraserBtn.addEventListener ("mouseout", function () {
+    if (eraserBtnActive === false) { 
+        Object.assign(eraserBtn.style, defaultStyle); 
+    };
+}); 
+
 
 
 //creating a clear-grid button
@@ -47,7 +184,6 @@ function clearGrid () {
     allCells.forEach(cell => { 
         cell.style.backgroundColor = "" ; 
     }); 
-    
 }; 
 clearBtn.addEventListener("click", clearGrid);
 clearBtn.addEventListener("mouseover", function () {
@@ -88,21 +224,12 @@ newGrid.appendChild(newBtn);
 }
 
 function changeGrid () { 
-    
     const squareBox = document.getElementById("container");
     while (squareBox.firstChild) { 
         squareBox.removeChild(squareBox.firstChild); 
     };
-
     userInput(); 
-
-    const cells = document.querySelectorAll(".row-lines");
-    cells.forEach(cell => { 
-        cell.addEventListener("mouseover", function(){
-            const randomColor = getRandomColor(); 
-            this.style.backgroundColor = randomColor; 
-        }); 
-    }); 
+    standardPen(); 
 }; 
 
 newBtn.addEventListener("click", changeGrid); 
@@ -113,116 +240,12 @@ newBtn.addEventListener("mouseout", function () {
     Object.assign(newBtn.style, defaultStyle);
 });
 
-//standard 16x16 grid upon landing page 
+
+
+function startGame() { 
+    standardPen(); 
+}; 
+
 createGrid(16); 
+startGame(); 
 
-// set hover motion over drawing pad 
-
-const cells = document.querySelectorAll(".row-lines");
-cells.forEach(cell => { 
-    cell.addEventListener("mouseover", function(){
-        const randomColor = getRandomColor(); 
-        this.style.backgroundColor = randomColor; 
-    }); 
-}); 
-
-//creating eraser button 
-var eraserBtn = document.createElement ("button"); 
-eraserBtn.classList.add("eraseButton");
-var eraserText = document.createTextNode("Eraser"); 
-eraserBtn.appendChild(eraserText); 
-var eraser = document.getElementById("eraser-button"); 
-eraser.appendChild(eraserBtn); 
-
-let clickCount = 0; 
-let eraserBtnActive = false; 
-
-eraserBtn.addEventListener("click", function (){
-
-    clickCount++; 
-    
-    if (clickCount % 2 === 0) { 
-        eraserBtnActive = false;
-        pen (); 
-        Object.assign(eraserBtn.style, defaultStyle); 
-    } else {
-        eraserBtnActive = true;
-        erase (); 
-        Object.assign (eraserBtn.style, hoverStyle); 
-    }   
-});
-
-function erase () { 
-    const cells = document.querySelectorAll(".row-lines");
-            cells.forEach(cell => { 
-            cell.addEventListener("mouseover", function(){ 
-                this.style.backgroundColor = "aliceblue";
-            });  
-        }); 
-    eraserBtn.classList.add("erase"); 
-}; 
-
-function pen () { 
-    const cells = document.querySelectorAll(".row-lines");
-            cells.forEach(cell => { 
-            cell.addEventListener("mouseover", function(){ 
-                const randomColor = getRandomColor(); 
-                this.style.backgroundColor = randomColor; 
-            });  
-        });
-}; 
-
-eraserBtn.addEventListener("mouseover", function () {
-    Object.assign(eraserBtn.style, hoverStyle); 
-}); 
-
-eraserBtn.addEventListener ("mouseout", function () {
-    if (eraserBtnActive === false) { 
-        Object.assign(eraserBtn.style, defaultStyle); 
-    };
-}); 
-
-/* if { 
-    !eraserBtn.classList.contains("erase")
-    }  */
-
-
-/*
-//creating pen button 
-var paintBtn = document.createElement ("button"); 
-paintBtn.classList.add("paintButton");
-var paintText = document.createTextNode("Paint"); 
-paintBtn.appendChild(paintText); 
-var paint = document.getElementById("paint-button"); 
-paint.appendChild(paintBtn); 
-
-paintBtn.addEventListener("click", function (e) { 
-    onclick = function (e) {
-        const cells = document.querySelectorAll(".row-lines");
-            cells.forEach(cell => { 
-            cell.addEventListener("mouseover", function(){
-            const randomColor = getRandomColor(); 
-            this.style.backgroundColor = randomColor; 
-            });  
-        }); 
-    };  
-
-    paintBtn.classList.toggle("clicked"); 
-    if (paintBtn.classList.contains("clicked")) { 
-        Object.assign(paintBtn.style, clickedStyle);
-        Object.assign(eraserBtn.style, defaultStyle);
-    } else { 
-        Object.assign (paintBtn.style, defaultStyle); 
-    }; 
-});
-
-paintBtn.addEventListener("mouseover", function () {
-    Object.assign(paintBtn.style,hoverStyle); 
-}); 
-paintBtn.addEventListener ("mouseout", function () {
-    if (!paintBtn.classList.contains("clicked")) {
-        Object.assign(paintBtn.style,defaultStyle); 
-    };
-}); 
-
-*/
