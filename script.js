@@ -32,6 +32,7 @@ let hoverStyle = {
     color: "rgb(94, 94, 160)" 
 }; 
 
+
 //creating a clear-grid button
 //this clears the drawing the pad
 var clearBtn = document.createElement ("button"); 
@@ -134,21 +135,21 @@ var eraser = document.getElementById("eraser-button");
 eraser.appendChild(eraserBtn); 
 
 let clickCount = 0; 
-eraserBtn.addEventListener("click", function () { 
+let eraserBtnActive = false; 
 
-    clickCount ++ 
+eraserBtn.addEventListener("click", function (){
+
+    clickCount++; 
     
     if (clickCount % 2 === 0) { 
-        pen();
-        Object.assign(eraserBtn.style, defaultStyle) 
-        eraserBtn.classList.remove("erase");    
+        eraserBtnActive = false;
+        pen (); 
+        Object.assign(eraserBtn.style, defaultStyle); 
     } else {
-        erase ();
-        Object.assign(eraserBtn.style, hoverStyle);
-        eraserBtn.classList.remove("pen"); 
-       
-    }; 
-
+        eraserBtnActive = true;
+        erase (); 
+        Object.assign (eraserBtn.style, hoverStyle); 
+    }   
 });
 
 function erase () { 
@@ -157,9 +158,8 @@ function erase () {
             cell.addEventListener("mouseover", function(){ 
                 this.style.backgroundColor = "aliceblue";
             });  
-        });  
-    eraserBtn.classList.add("erase");
-    console.log("first click = erase")
+        }); 
+    eraserBtn.classList.add("erase"); 
 }; 
 
 function pen () { 
@@ -170,22 +170,21 @@ function pen () {
                 this.style.backgroundColor = randomColor; 
             });  
         });
-    eraserBtn.classList.add("pen");
-    console.log("second click = pen")
 }; 
 
 eraserBtn.addEventListener("mouseover", function () {
     Object.assign(eraserBtn.style, hoverStyle); 
-    console.log ("hover")
 }); 
 
 eraserBtn.addEventListener ("mouseout", function () {
-    if (!eraserBtn.classList.contains("erase")) {
+    if (eraserBtnActive === false) { 
         Object.assign(eraserBtn.style, defaultStyle); 
     };
-    console.log ("unhover")
 }); 
 
+/* if { 
+    !eraserBtn.classList.contains("erase")
+    }  */
 
 
 /*
