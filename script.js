@@ -109,6 +109,15 @@ rainbowBtn.addEventListener("click", function (){
     }   
 });
 
+rainbowBtn.addEventListener("mouseover", function () {
+    Object.assign(rainbowBtn.style, hoverStyle); 
+}); 
+rainbowBtn.addEventListener ("mouseout", function () {
+    if (rainbowBtnActive === false) { 
+        Object.assign(rainbowBtn.style, defaultStyle); 
+    };
+}); 
+
 //creating eraser button 
 var eraserBtn = document.createElement ("button"); 
 eraserBtn.classList.add("eraseButton");
