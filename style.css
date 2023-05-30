@@ -1,6 +1,6 @@
 #container { 
-    width: 600px; 
-    height: 600px;
+    width: 500px; 
+    height: 500px;
     display: flex;  
     border: 1px solid black;
     margin: auto;
@@ -37,7 +37,7 @@
 }
 
 h1 { 
-    font-size: 75px; 
+    font-size: 60px; 
     text-align: center; 
     color: rgb(228, 228, 228); 
     font-family: 'Lilita One', cursive;
@@ -46,7 +46,7 @@ h1 {
     text-transform: uppercase;
     background-color: rgb(59, 59, 134) ;
     margin-bottom: 20px; 
-    padding: 25px;
+    padding: 15px;
     
 }
 
@@ -60,21 +60,32 @@ h1 {
 .newButton, 
 .eraseButton, 
 .rainbowButton {
-    width: 150px;
+    width: 100px;
     padding: 10px;
-    margin: 20px; 
-    font-size: 20px;
+    margin: 10px; 
+    font-size: 15px;
     font-weight: bold; 
     border: 2px black;
     border-style: solid;
     background-color:rgb(202, 223, 249); 
     border-radius: 6px;  
-}; 
+} 
 
-
-p { 
-    margin-top: 20px;
+.footer { 
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: sans-serif; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+a { 
+    color:rgb(59, 59, 134); 
+}
+
+
 
 
 
